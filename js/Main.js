@@ -5,27 +5,30 @@ import { cargar_producto } from "./Cargar_productos.js";
 let DOM = document.querySelector("#root")
 
 DOM.innerHTML = `
-    <header></header>
+    <header class="header"></header>
     <main class="body">
         <section id="div_producto_list"></section>
         <section id="div_summery_description"></section>
     </main>
-    <footer></footer>
+    <footer class="footer"></footer>
 `
 
 
 
 
 
-fetch('https://fakestoreapi.com/products')
-    .then(res => res.json())
-    .then(data => {
+async function obtenerProductos() {
+    try {
+        const res = await fetch('https://fakestoreapi.com/products');
+        const data = await res.json();
         let productos_api = data;
         
-        
-        //Mi programa
-        cargar_producto(productos_api)
-   
-    });
+        Cargar_categorias()    
+        // Mi programa
+        cargar_producto(productos_api);
+    } catch (error) {
+        console.error('Ha ocurrido un error al obtener los productos:', error);
+    }
+}
 
-Cargar_categorias()    
+obtenerProductos();

@@ -12,6 +12,7 @@ function imprimir_categorias(lista_categorias) {
     lista_categorias.forEach(element => {
         
         let div = document.createElement("div")
+        div.classList.add("opciones")
         div.innerHTML = `
         <input type="checkbox" id="${element}">
         <label for="${element}">${element}</label>
